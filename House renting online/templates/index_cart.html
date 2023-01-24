@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+# added 
+{%  crispy form form.helper%}
+
+{% block title %} Payment {% endblock %}
+
+{% block search_box %}
+
+{% endblock %}
+{% block nav %}
+        <li><a href="{% url 'newhouse' %}"><span class="glyphicon glyphicon-align-justify"></span> Newly Added House</a></li>
+        <li><a href="{% url 'popularhouse' %}"><span class="glyphicon glyphicon-star"></span> Popular House</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+{% endblock %}
+
+
+{% block body %}
+    <a href="{% url 'home' %}">Home</a>
+    <h3>Simple Payment with yenepay using Cart</h3>
+    <form action="https://test.yenepay.com/" method="POST">
+        {% csrf_token %}
+        {% for x, y in obj.items %}
+            <input type="hidden" name="{{ x }}" value="{{ y }}">
+        {% endfor %}
+        {% for s in cart.cartitems %}
+            {% with sc=forloop.counter0 %}
+                {% for i, j in s.items %}
+                    <input type="hidden" name="Items[{{sc}}].{{i}}" value="{{j}}">
+                {% endfor %}
+            {% endwith %}
+        {% endfor %}
+        7180.0 ETB
+        <input type="submit" value="Pay with yenepay">
+    </form>
+{% endblock %}

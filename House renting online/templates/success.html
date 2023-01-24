@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+# added 
+{%  crispy form form.helper%}
+
+{% block title %} Sucess {% endblock %}
+
+{% block search_box %}
+
+{% endblock %}
+{% block nav %}
+        <li><a href="{% url 'newhouse' %}"><span class="glyphicon glyphicon-align-justify"></span> Newly Added House</a></li>
+        <li><a href="{% url 'popularhouse' %}"><span class="glyphicon glyphicon-star"></span> Popular House</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout {{request.user.username}}</a></li>
+{% endblock %}
+
+
+{% block body %}
+    <h2>You have successfully paid thank you!</h2>
+    <p>Status: {{ status }}</p>
+    <p>Total Amount you paid: {{ total }}</p>
+{% endblock %}
